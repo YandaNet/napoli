@@ -1,0 +1,17 @@
+{% extends "menu/base.html" %}
+
+{% block title %}{{ dish.name }}{% endblock %}
+
+{% block content %}
+    <h1>{{ dish.name }}</h1>
+    <p><em>Категорія: {{ dish.category.name }}</em></p>
+    <p>{{ dish.description }}</p>
+    <p class="price">Ціна: {{ dish.price|floatformat:0 }} грн</p>
+
+    <p>
+        <a href="{% url "menu:dish_update" dish.id %}">Редагувати</a> |
+        <a href="{% url "menu:dish_delete" dish.id %}">Видалити</a>
+    </p>
+
+    <a href="{% url 'menu:menu_list' %}">← Назад до меню</a>
+{% endblock %}

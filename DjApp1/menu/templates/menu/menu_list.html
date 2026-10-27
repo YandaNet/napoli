@@ -1,0 +1,20 @@
+{% extends "menu/base.html" %}
+
+{% block title %}Меню{% endblock %}
+
+{% block content %}
+    <h1>Наше меню</h1>
+    <p><a href="{% url 'menu:dish_create' %}">+ Додати страву</a></p>
+    {% for dish in dishes %}
+        <div class="card">
+            <h3>
+                <a href="{% url 'menu:dish_detail' dish.id %}">{{ dish.name }}</a>
+            </h3>
+            <small>{{ dish.category.name }}</small>
+            <p>{{ dish.description }}</p>
+            <span class="price">{{ dish.price|floatformat:0 }} грн</span>
+        </div>
+    {% empty %}
+        <p>Меню поки порожнє.</p>
+    {% endfor %}
+{% endblock %}

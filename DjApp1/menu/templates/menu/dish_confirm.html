@@ -1,0 +1,14 @@
+{% extends "menu/base.html" %}
+
+{% block title %}Видалення{% endblock %}
+
+{% block content %}
+    <h1>Видалити страву?</h1>
+    <p>Ви впевнені, що хочете видалити "<strong>{{ dish.name }}</strong>"? Це не можливо скасувати</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" style="background: firebrick; color: white">Так, видалити</button>
+        <a href="{% url 'menu:dish_detail' dish.id %}">Скасувати</a>
+    </form>
+{% endblock %}
