@@ -216,17 +216,18 @@
 <body>
 
 <nav>
-    <a href="{% url 'menu:home' %}">🍕 <strong>Піцерія</strong></a>
-    <a href="{% url 'menu:menu_list' %}">📋 Меню</a>
-    <a href="{% url 'menu:delivery' %}">🛵 Доставка</a>
+    <a href="{% url 'menu:home' %}">Головна</a>
+    <a href="{% url 'menu:menu_list' %}">Меню</a>
+    <a href="{% url 'menu:cart_detail' %}">🛒 Кошик</a>
+
 
     <div class="nav-right">
         {% if user.is_authenticated %}
             <span>Вітаю, <strong>{{ user.username }}</strong></span>
-            <form method="post" action="{% url 'accounts:logout' %}">
-                {% csrf_token %}
-                <button type="submit">Вийти</button>
-            </form>
+            <form action="{% url 'accounts:logout' %}" method="post" style="display: inline; margin-left: 10px;">
+    {% csrf_token %}
+    <button type="submit" style="background: none; border: none; color: blue; cursor: pointer; text-decoration: underline;">Вийти</button>
+</form>
         {% else %}
             <a href="{% url 'accounts:login' %}">Увійти</a>
             <a href="{% url 'accounts:register' %}">Реєстрація</a>

@@ -9,8 +9,12 @@
     <p class="price">Ціна: {{ dish.price|floatformat:0 }} грн</p>
 
     <p>
-        <a href="{% url "menu:dish_update" dish.id %}">Редагувати</a> |
-        <a href="{% url "menu:dish_delete" dish.id %}">Видалити</a>
+        {% if user.is_authenticated %}
+    <div style="margin-top: 20px; display: flex; gap: 10px;">
+        <a href="{% url 'menu:dish_update' dish.id %}" class="btn">Редагувати страву</a>
+        <a href="{% url 'menu:dish_delete' dish.id %}" class="btn" style="background: #e53e3e; color: white;">Видалити страву</a>
+    </div>
+{% endif %}
     </p>
 
     <a href="{% url 'menu:menu_list' %}">← Назад до меню</a>

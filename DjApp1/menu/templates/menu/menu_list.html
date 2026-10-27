@@ -4,15 +4,21 @@
 
 {% block content %}
     <h1>Наше меню</h1>
-    <p><a href="{% url 'menu:dish_create' %}">+ Додати страву</a></p>
+    {% if user.is_authenticated %}
+    <a href="{% url 'menu:dish_create' %}" class="btn" style="margin-bottom: 20px; display: inline-block;">+ Додати страву</a>
+    {% endif %}
+
     {% for dish in dishes %}
-        <div class="card">
+        <div class="card" style="margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 8px;">
             <h3>
                 <a href="{% url 'menu:dish_detail' dish.id %}">{{ dish.name }}</a>
             </h3>
             <small>{{ dish.category.name }}</small>
             <p>{{ dish.description }}</p>
-            <span class="price">{{ dish.price|floatformat:0 }} грн</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+                <span class="price" style="font-weight: bold; color: #e53e3e;">{{ dish.price|floatformat:0 }} грн</span>
+                <a href="{% url 'menu:add_to_cart' dish.id %}" class="btn" style="background: #007bff; color: white; padding: 8px 15px; text-decoration: none; border-radius: 4px;">Додати в кошик</a>
+            </div>
         </div>
     {% empty %}
         <p>Меню поки порожнє.</p>
